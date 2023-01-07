@@ -15,10 +15,19 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
-      - name: Install and build
-        run: npm install && npm run stage-build && cp dist/angular-ci-cd/index.html dist/angular-ci-cd/404.html
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run:  npm run stage-build && cp dist/angular-ci-cd/index.html dist/angular-ci-cd/404.html
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
